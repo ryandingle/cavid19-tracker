@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    {% load staticfiles %}
+    <title>Covid 19 Tracker</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="generator" content="Codeply">
+    <!-- Less styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/table.css' %}" rel="stylesheet">
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/table.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+    <script type="text/javascript" >
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                'pageLength': 50
+            });
+        } );
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>Covid 19 Tracker <small><a href="{% url 'covid:download' %}">Click to download all data as CSV file</a></small></h1>
+        </div>
+        <table id="myTable" class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>country</th>
+                    <th>cases</th>
+                    <th>todayCases</th>
+                    <th>deaths</th>
+                    <th>todayDeaths</th>
+                    <th>recovered</th>
+                    <th>active</th>
+                    <th>critical</th>
+                    <th>casesPerOneMillion</th>
+                    <th>deathsPerOneMillion</th>
+                    <th>totalTests</td>
+                    <th>testsPerOneMillion</th>
+                    <th>updated_date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in dataset %}
+                <tr>
+                    <td>{{i.country}}</td>
+                    <td>{{i.cases}}</td>
+                    <td>{{i.todayCases}}</td>
+                    <td>{{i.deaths}}</td>
+                    <td>{{i.todayDeaths}}</td>
+                    <td>{{i.recovered}}</td>
+                    <td>{{i.active}}</td>
+                    <td>{{i.critical}}</td>
+                    <td>{{i.casesPerOneMillion}}</td>
+                    <td>{{i.deathsPerOneMillion}}</td>
+                    <td>{{i.totalTests}}</td>
+                    <td>{{i.testsPerOneMillion}}</td>
+                    <td>{{i.updated_date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br />
+        <br />
+    </div>
+</body>
+</html>
